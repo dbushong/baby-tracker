@@ -1,2 +1,4 @@
-/.hg
-/.hgignore
+.hg
+.hgignore
+log
+tmp
