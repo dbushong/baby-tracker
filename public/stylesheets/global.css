@@ -1,0 +1,274 @@
+body {
+  background-color: white;
+  color: black;
+  font-size: 12pt;
+}
+#message {
+  font-weight: bold;
+  border: 2px solid #0c0;
+}
+
+.errorExplanation {
+  font-size: 90%;
+  color: #c00;
+}
+
+.errorExplanation h2 {
+  font-size: 100%;
+}
+
+div.fieldWithErrors {
+  border-width: 0 3px 0 3px;
+  border-style: solid;
+  border-color: #f55;
+  padding: 2px;
+  margin: 1px;
+  display: inline;
+}
+
+.simple {
+  margin-top: 0.5em;
+  text-align: center;
+}
+
+.simple input {
+  margin: 0.5em;
+  font-size: 120%;
+  font-weight: bold;
+}
+
+.simple input[type=text] {
+  background-color: white;
+}
+
+.nav {
+  width: 10em;
+  float: left;
+  padding: 1em;
+  font-weight: bold;
+  background-color: #f3f3f3;
+}
+
+.clear {
+  clear: both;
+}
+
+.content {
+  margin: 1em;
+}
+
+#report-summary .time, 
+#report-summary .spitup, 
+#report-summary .pp, 
+#report-summary .meds {
+  float: left;
+}
+
+#report-summary .spitup {
+  text-align: center;
+}
+
+#report-summary .time, 
+#report-summary .spitup {
+  width: 3em;
+}
+
+dd {
+  margin-left: 20px;
+  margin-bottom: 1em;
+}
+
+#report-summary .day {
+  font-weight: bold;
+}
+
+#report-summary .meds {
+  margin-left: 2em;
+  font-style: italic;
+}
+
+#recent {
+  padding: 0;
+}
+
+#recent li {
+  padding: 0 2px;
+  list-style-type: none;
+}
+
+#recent .pee,
+#timers #pee-timer .title-bar {
+  background-color: #ffffcc;
+}
+
+#recent .poop,
+#timers #poop-timer .title-bar {
+  background-color: #e5ccb2;
+}
+
+#recent .spitup,
+#timers #spitup-timer .title-bar {
+  background-color: black;
+}
+
+#recent .spitup {
+  color: white;
+}
+
+#recent .sleep,
+#timers #sleep-timer .title-bar {
+  background-color: #ccd9e5;
+}
+
+#recent .wakeup,
+#timers #wakeup-timer .title-bar {
+  background-color: #e5f2ff;
+}
+
+#recent .feed {
+  background-color: #f9f9f9;
+}
+
+/*
+#recent .feed .time,
+#recent .solids .time {
+  font-weight: bold;
+}
+*/
+
+#recent .meds,
+#timers #meds-timer .title-bar {
+  background-color: #ffd9d9;
+}
+
+#recent .solids,
+#timers #solids-timer .title-bar {
+  background-color: #cce5b2;
+}
+
+#recent a {
+  font-weight: bold;
+  text-decoration: none;
+  display: block;
+  float: left;
+  width: 85px;
+}
+
+#recent a:hover {
+  text-decoration: underline;
+}
+
+#recent .pee a,
+#timers #pee-timer .title-bar .title {
+  color: #cc9966;
+}
+
+#recent .poop a,
+#timers #poop-timer .title-bar .title {
+  color: #663300;
+}
+
+#recent .sleep a,
+#timers #sleep-timer .title-bar .title {
+  color: #003366;
+}
+
+#recent .wakeup a,
+#timers #wakeup-timer .title-bar .title {
+  color: #336699;
+}
+
+#recent .feed a,
+#timers #feed-timer .title-bar .title {
+  color: #666666;
+}
+
+#recent .spitup a,
+#timers #spitup-timer .title-bar .title {
+  color: #999999;
+}
+
+#recent .meds a,
+#timers #meds-timer .title-bar .title {
+  color: #663333;
+}
+
+#recent .solids a,
+#timers #solids-timer .title-bar .title {
+  color: #336600;
+}
+
+#recent {
+  float: left;
+}
+
+#recent .notes {
+  font-size: 60%;
+  font-style: italic;
+  margin-left: 1em;
+}
+
+#timers {
+  float: right;
+}
+
+#timers > div {
+  width: 10em;
+  border: 1px solid #e0e0e0;
+}
+
+#timers .title-bar {
+  margin-top: 2px;
+  height: 1.5em;
+  padding: 5px 5px 0 5px;
+  background-color: #f0f0f0;
+}
+
+#timers .button {
+  float: right;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  border: 1px solid black;
+  background-color: white;
+  text-align: center;
+  font-weight: bold;
+  padding: 0 1px 2px 0;
+}
+
+#timers .title {
+  float: left;
+  font-weight: bold;
+}
+
+.running .timer {
+  font-size: 80%;
+  padding: 2px;
+}
+
+.overtime {
+  font-weight: bold;
+}
+
+#shortcuts {
+  font-size: 80%;
+  margin: 0;
+  padding: 0;
+}
+
+#shortcuts b {
+  text-transform: uppercase;
+}
+
+#time {
+  width: 5em;
+  border: none;
+  position: relative;
+  top: 10px;
+  border-bottom: 1px dashed black;
+}
+
+.elapsed {
+  font-size: 60%;
+  margin-left: 1em;
+}

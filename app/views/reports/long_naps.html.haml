@@ -1,0 +1,7 @@
+%dl
+  - for date in @dates
+    %dt== #{date}:
+    %dd
+      %ul
+        - for nap in @days[date]
+          %li&== #{nap.start.strftime('%H:%M')} - #{nap.finish.strftime('%H:%M')}: #{hours_mins(nap.duration)}

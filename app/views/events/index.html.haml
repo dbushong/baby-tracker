@@ -1,0 +1,41 @@
+#shortcuts
+- form_tag :action => :create_simple do
+  = hidden_field_tag :quantity
+  = hidden_field_tag :notes
+  .simple
+    - for activity in EventType.find(:all)
+      = submit_tag activity.event.capitalize, :id => "simple-#{activity.event}"
+    .clear
+    = label_tag :time, 'Time:'
+    = text_field_tag :time, nil, :autocomplete => 'off'
+
+- if @recent.size > 0
+  %ul#recent
+    - for event in @recent
+      %li{:class => event.type_name}<
+        = link_to event.type_name.capitalize, edit_event_path(event)
+        %span.time<
+          = event.happened_at.to_formatted_s(:pretty_short)
+        - if event.quantity
+          ==  - #{event.quantity}g
+        - if event.notes
+          %span.notes&= event.notes
+        - if @elapsed[event.id]
+          %span.elapsed
+            == (#{hours_mins(@elapsed[event.id])} since prev. #{event.type_name.capitalize})
+- else
+  #recent No events logged for the last 24 hours.
+
+#timers
+  - for timer in @timers
+    %div{:id => "#{timer.name}-timer"}
+      %script== last[#{timer.name.to_json}] = new Date(#{timer.time.to_json});
+      .title-bar
+        .title= timer.name.capitalize
+        .button{:id => "#{timer.name}-button"} +
+      .timer
+
+%script
+  == var last_update     = #{@last_update.to_json}; 
+  == var last_update_url = #{last_update_path.to_json}; 
+  $(inputPageInit);

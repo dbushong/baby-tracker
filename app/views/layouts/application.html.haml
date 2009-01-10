@@ -1,0 +1,23 @@
+%html
+  %head
+    %title= @title
+    = stylesheet_link_tag 'global'
+    = stylesheet_link_tag 'tablesorter-blue'
+    = javascript_include_tag 'http://jqueryjs.googlecode.com/files/jquery-1.2.6.min.js'
+    = javascript_include_tag 'jquery.cookie'
+    = javascript_include_tag 'jquery.tablesorter.min'
+    = javascript_include_tag 'application'
+    - if @refresh
+      %meta{'http-equiv' => 'refresh', :content => "#@refresh"}
+  %body
+    .nav= link_to 'Home',    events_path
+    .nav= link_to 'Reports', :controller => 'reports'
+
+    .clear
+
+    - if flash[:message]
+      #message= h flash[:message]
+      - if flash[:fade]
+        %script setTimeout(function () {$('#message').fadeOut('slow');}, 5000);
+
+    .content= yield

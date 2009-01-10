@@ -1,0 +1,25 @@
+%fieldset
+  %legend Date Range
+  - form_tag :action => :report do
+    .field 
+      %label{:for => 'from_date'} From Date:
+      = text_field_tag :from_date, 30.days.ago.to_s(:md)
+
+    .field
+      %label{:for => 'to_date'} To Date:
+      = text_field_tag :to_date, Time.now.to_s(:md)
+
+    %ul 
+      %li= submit_tag 'Chart Spitup Grams by Day'
+      %li= submit_tag 'Chart Spitup Grams by Week'
+      %li= submit_tag 'Chart Diapers per Week'
+      %li= submit_tag 'Chart Nap Duration'
+      %li= submit_tag 'Long Naps'
+      %li= submit_tag 'Summary'
+      %li= submit_tag 'Log'
+
+%fieldset
+  %legend All Data
+  %ul
+    %li= link_to 'Chart Spitup Grams by Day of Week', :action => 'chart_spitup_by_dow'
+    %li= link_to 'Chart Diaper Changes by Hour', :action => 'chart_diapers_by_hour'

@@ -1,0 +1,16 @@
+%table.tablesorter
+  %thead
+    %tr
+      %th When
+      %th What
+      %th How Much
+  %tbody
+    - for event in @events
+      %tr 
+        %td= event.happened_at.strftime('%b %d, %Y %I:%M %p')
+        %td= event.event_type.event.capitalize
+        %td
+          - if event.quantity
+            = event.quantity
+
+%script $(function () { $('.tablesorter').tablesorter(); });

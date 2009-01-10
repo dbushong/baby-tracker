@@ -1,0 +1,15 @@
+%dl#report-summary
+  - for day in @days
+    %dt 
+      %b== #{day.date.month}/#{day.date.day}
+      - if day.total_spitup > 0
+        %i== #{day.total_spitup}g spitup
+    %dd
+      - for feeding in day.feedings
+        .time= feeding.time.strftime('%H%M')
+        - if feeding.spitup > 0
+          .spitup== #{feeding.spitup}g
+        .pp= feeding.pp.join(',')
+        - if feeding.meds
+          .meds== (meds at: #{feeding.meds.strftime('%H:%M')})
+        %br

@@ -1,0 +1,19 @@
+- form_for @event do |f|
+  = f.error_messages
+
+  .field
+    %label{:for => :event_event_type_id} Type:
+    = f.select :event_type_id, EventType.all.map {|t| [t.event.capitalize, t.id] }
+  .field
+    %label{:for => :event_quantity} Quantity:
+    = f.text_field :quantity
+  .field
+    %label{:for => :event_happened_at} Time:
+    = f.text_field :happened_at
+  .field
+    %label{:for => :event_notes} Notes:
+    = f.text_area :notes
+  = submit_tag 'Save Changes'
+
+- form_tag event_path(@event), :method => :delete do |f|
+  = submit_tag 'Delete Event'
