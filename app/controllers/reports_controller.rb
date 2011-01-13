@@ -7,13 +7,14 @@ class ReportsController < ApplicationController
 
   def report
     begin
-      from_date = parse_date(params[:from_date])
+      from_date = parse_date(params[:from_date], false, true)
       to_date   = parse_date(params[:to_date], true)
     rescue ArgumentError
       flash[:message] = 'Invalid date format'
       redirect_to :action => :index
       return
     end
+
 
     case params[:commit]
     when 'Summary'
@@ -30,6 +31,32 @@ class ReportsController < ApplicationController
       long_naps(from_date, to_date)
     else
       raise "'#{params[:commit]}' not yet implemented"
+    end
+  end
+
+  def solids
+    @title = 'Solids Fed'
+
+    rows = Event.connection.select_rows(%q{
+        SELECT notes, MIN(happened_at) 
+          FROM events 
+         WHERE notes IS NOT NULL AND notes <> '' AND event_type_id = 8 
+      GROUP BY 1
+      ORDER BY 2 DESC
+    })
+    @menus  = {}
+    @combos = {}
+    @foods  = {}
+
+    for row in rows
+      menu = row[0].gsub(/[\d.]+\S*\s+/, '')
+      date = parse_date(row[1])
+
+      @menus[menu] = date
+      menu.split(/\s*&\s*/).sort.each {|c| @combos[c] = date }
+      menu.split(/\s*[&+]\s*/).
+        map {|f| f.gsub(/^(diluted|mashed)\s+|e?s$/, '') }.
+        sort.each {|f| @foods[f] = date }
     end
   end
 
@@ -78,11 +105,14 @@ class ReportsController < ApplicationController
 
   private #####################################################################
 
-  def parse_date(str, eod = false)
-    off = DateTime.now.offset
+  def parse_date(str, eod = false, no_future = false)
+    now = DateTime.now
+    off = now.offset
     dt  = DateTime.parse(str).new_offset(off) - off
     dt += Rational(86399, 86400) if
       eod && dt.hour == 0 && dt.min == 0 && dt.sec == 0
+    dt = DateTime.new(dt.year-1, dt.mon, dt.day, dt.hour, dt.min, dt.sec, off) \
+      if no_future && dt > now
     dt
   end
 

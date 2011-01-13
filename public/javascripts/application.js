@@ -147,6 +147,11 @@ function handleShortcutKeys(e) {
     // closeLightBox();
     $('#time').focus();
   }
+  else if (c == 'n') {
+    var notes = prompt('Notes', $('#notes').val());
+    if (notes !== null)
+      $('#notes').val(notes);
+  }
   else {
     return true;
   }

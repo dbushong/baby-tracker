@@ -9,7 +9,7 @@
     = f.text_field :quantity
   .field
     %label{:for => :event_happened_at} Time:
-    = f.text_field :happened_at
+    = f.datetime_select :happened_at
   .field
     %label{:for => :event_notes} Notes:
     = f.text_area :notes

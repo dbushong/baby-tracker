@@ -1,0 +1,11 @@
+%h2 Foods
+= render :partial => 'solids', :locals => { :title => 'Food', :items => @foods, :editable => true }
+
+%h2 Combinations
+= render :partial => 'solids', :locals => { :title => 'Combinations', :items => @combos }
+
+%h2 Menus
+= render :partial => 'solids', :locals => { :title => 'Menus', :items => @menus }
+
+:javascript
+  $(function () { $('.tablesorter').tablesorter({ sortList: [[0,0]] }); });

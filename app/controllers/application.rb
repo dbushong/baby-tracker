@@ -12,4 +12,17 @@ class ApplicationController < ActionController::Base
   # Uncomment this to filter the contents of submitted sensitive data parameters
   # from your application log (in this case, all fields with names like "password"). 
   # filter_parameter_logging :password
+  #
+
+  before_filter :set_time_zone
+
+  private
+
+  def set_time_zone
+    Time.zone = 'Pacific Time (US & Canada)'
+    authenticate_with_http_basic do |user,pass|
+      Time.zone = "Eastern Time (US & Canada)" if user == 'dawn'
+      true
+    end
+  end
 end

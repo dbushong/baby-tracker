@@ -17,7 +17,7 @@
         %span.time<
           = event.happened_at.to_formatted_s(:pretty_short)
         - if event.quantity
-          ==  - #{event.quantity}g
+          ==  ~ #{event.quantity}g
         - if event.notes
           %span.notes&= event.notes
         - if @elapsed[event.id]

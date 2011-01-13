@@ -1,0 +1,10 @@
+%table.tablesorter
+  %thead
+    %tr
+      %th= title
+      %th First Served
+  %tbody
+    - for item in items.keys.sort
+      %tr
+        %td&= item
+        %td&= items[item].to_s(:mdy)

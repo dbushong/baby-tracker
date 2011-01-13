@@ -13,4 +13,9 @@
           - if event.quantity
             = event.quantity
 
-%script $(function () { $('.tablesorter').tablesorter(); });
+:javascript
+  $(function () { 
+    $('.tablesorter').tablesorter({
+      sortList: [[0,0]],
+    }); 
+  });

@@ -43,7 +43,7 @@ class EventsController < ApplicationController
   end
 
   def create_simple
-    now  = DateTime.now
+    now  = Time.zone.now
     time = params[:time]
     time = nil if time.empty?
     if time && time =~ 
@@ -51,7 +51,7 @@ class EventsController < ApplicationController
       y, mo, d, hm, ap, minus = $1, $2, $3, $4, $5, $6
       if minus
         h, m = split_hm(minus)
-        time = now - (Rational(h, 24) + Rational(m, 1440))
+        time = now - (h.hours + m.minutes)
       else
         hm = hm.gsub(':', '').to_i
         ambig_hour = ambig_min = false
@@ -60,7 +60,7 @@ class EventsController < ApplicationController
           m = hm % 100
           if ap 
             h += 12 if ap.downcase == 'p' && h < 12
-          elsif h < 12
+          elsif h < 13
             ambig_hour = true 
           end
         else
@@ -75,14 +75,14 @@ class EventsController < ApplicationController
           mo = now.month
           d  = now.day
         end
-        time = DateTime.new(y, mo, d, h, m, 0, now.offset)
+        time = Time.zone.local(y, mo, d, h, m, 0)
         if time > now
           time -=
-            if    ambig_hour then Rational(12, 24)
-            elsif ambig_min  then Rational(1, 24)
-            else                  1 ; end
-        elsif ambig_hour && time < now - Rational(12, 24)
-          time += Rational(12, 24)
+            if    ambig_hour then 12.hours
+            elsif ambig_min  then 1.hour
+            else                  1.day ; end
+        elsif ambig_hour && time < now - 12.hours
+          time += 12.hours
         end
       end
     end
@@ -94,7 +94,7 @@ class EventsController < ApplicationController
       last_sleep = Event.by_type('sleep').last(:order => 'happened_at')
       if last_sleep
         last_wake = Event.by_type('wakeup').last(:order => 'happened_at')
-        wtime = (time || DateTime.now) - Rational(5, 1440) # 5 mins ago
+        wtime = (time || Time.zone.now) - 5.minutes # 5 mins ago
         if !last_wake || last_wake.happened_at < last_sleep.happened_at &&
             wtime > last_sleep.happened_at
           wake_id =
